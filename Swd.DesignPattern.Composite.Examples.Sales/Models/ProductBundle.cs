@@ -7,27 +7,40 @@ using System.Threading.Tasks;
 
 namespace Swd.DesignPattern.Composite.Examples.Sales.Models
 {
-	public class ProductBundle : ISalesItem
+	public class ProductBundle : ISalesItem, IObserver
 	{
 
 		private string _bundleName;
 		private readonly List<ISalesItem> _items;
+		private decimal _cachedPrice;
+		private bool _isDirty;
 
 
 		public ProductBundle(string bundleName)
 		{
 			_bundleName = bundleName;
 			_items = new List<ISalesItem>();
+			_isDirty = true;
 		}
 
 		public void Add(ISalesItem item)
 		{
 			_items.Add(item);
+			if (item is ISubject subject)
+			{
+				subject.Attach(this);  // Observe price changes of products
+			}
+			_isDirty = true;  // Mark cache as outdated
 		}
 
 		public void Remove(ISalesItem item)
 		{
 			_items.Remove(item);
+			if (item is ISubject subject)
+			{
+				subject.Detach(this);  // Stop observing the removed product
+			}
+			_isDirty = true;  // Mark cache as outdated
 		}
 
 		public void Display()
@@ -35,18 +48,29 @@ namespace Swd.DesignPattern.Composite.Examples.Sales.Models
 			Console.WriteLine($"{_bundleName} Bundle:");
 			foreach (var item in _items)
 			{
-				item.Display();  
+				item.Display();
 			}
+
+			Console.WriteLine($"Total Price: ${GetPrice()}");
 		}
 
 		public decimal GetPrice()
 		{
-			decimal totalPrice = 0;
-			foreach (var item in _items)
+			if (_isDirty)
 			{
-				totalPrice += item.GetPrice();  
+				_cachedPrice = 0;
+				foreach (var item in _items)
+				{
+					_cachedPrice += item.GetPrice();
+				}
+				_isDirty = false;  // Update cache status
 			}
-			return totalPrice;
+			return _cachedPrice;
+		}
+
+		public void Update()
+		{
+			_isDirty = true;
 		}
 	}
 }

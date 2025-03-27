@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swd.DesignPattern.Composite.Examples.Menu", "Swd.DesignPattern.Composite.Examples.Menu\Swd.DesignPattern.Composite.Examples.Menu.csproj", "{A20223EC-4AC2-4428-96C0-1744037D14C7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swd.DesignPattern.Composite.Examples.Sales", "Swd.DesignPattern.Composite.Examples.Sales\Swd.DesignPattern.Composite.Examples.Sales.csproj", "{564878A8-71F1-43D4-B6D5-03F12A83E112}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A20223EC-4AC2-4428-96C0-1744037D14C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A20223EC-4AC2-4428-96C0-1744037D14C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A20223EC-4AC2-4428-96C0-1744037D14C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A20223EC-4AC2-4428-96C0-1744037D14C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{564878A8-71F1-43D4-B6D5-03F12A83E112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{564878A8-71F1-43D4-B6D5-03F12A83E112}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{564878A8-71F1-43D4-B6D5-03F12A83E112}.Release|Any CPU.ActiveCfg = Release|Any CPU
