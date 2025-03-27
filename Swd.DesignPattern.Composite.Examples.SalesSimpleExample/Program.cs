@@ -8,15 +8,15 @@ namespace Swd.DesignPattern.Composite.Examples.SalesSimpleExample
         public static void Main(string[] args)
         {
             // Create individual products
-            var product1 = new Product("Laptop", 1000);
-            var product2 = new Product("Mouse", 25);
-            var product3 = new Product("Keyboard", 75);
+            var Laptop = new Product("Laptop", 1000);
+            var Mouse = new Product("Mouse", 25);
+            var Keyboard = new Product("Keyboard", 75);
 
             // Create a product bundle
             var electronicsBundle = new ProductBundle("Electronics Bundle");
-            electronicsBundle.Add(product1);
-            electronicsBundle.Add(product2);
-            electronicsBundle.Add(product3);
+            electronicsBundle.Add(Laptop);
+            electronicsBundle.Add(Mouse);
+            electronicsBundle.Add(Keyboard);
 
             // Create another individual product
             var product4 = new Product("Headphones", 150);
@@ -28,8 +28,8 @@ namespace Swd.DesignPattern.Composite.Examples.SalesSimpleExample
 
             // Display details and calculate prices
             Console.WriteLine("Displaying individual product:");
-            product1.Display();
-            Console.WriteLine($"Price: ${product1.GetPrice()}\n");
+            Laptop.Display();
+            Console.WriteLine($"Price: ${Laptop.GetPrice()}\n");
 
             Console.WriteLine("Displaying product bundle:");
             electronicsBundle.Display();
