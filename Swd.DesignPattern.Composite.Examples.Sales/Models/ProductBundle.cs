@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Swd.DesignPattern.Composite.Examples.Sales.Models
 {
-	public class ProductBundle : ISalesItem, IObserver
+	public class ProductBundle : ISalesItem, IObserver, ISubject
 	{
 
 		private string _bundleName;
 		private readonly List<ISalesItem> _items;
-		private decimal _cachedPrice;
+		private List<IObserver> _observers;
+		private decimal? _cachedPrice = null;
 		private bool _isDirty;
 
 
@@ -20,18 +21,23 @@ namespace Swd.DesignPattern.Composite.Examples.Sales.Models
 		{
 			_bundleName = bundleName;
 			_items = new List<ISalesItem>();
+			_observers = new List<IObserver>();
 			_isDirty = true;
 		}
 
 		public void Add(ISalesItem item)
 		{
 			_items.Add(item);
+
 			if (item is ISubject subject)
 			{
-				subject.Attach(this);  // Observe price changes of products
+				subject.Attach(this);
 			}
-			_isDirty = true;  // Mark cache as outdated
+
+			_isDirty = true; 
+			Notify(); 
 		}
+
 
 		public void Remove(ISalesItem item)
 		{
@@ -56,21 +62,42 @@ namespace Swd.DesignPattern.Composite.Examples.Sales.Models
 
 		public decimal GetPrice()
 		{
-			if (_isDirty)
+			if (_isDirty || _cachedPrice == null)
 			{
-				_cachedPrice = 0;
-				foreach (var item in _items)
-				{
-					_cachedPrice += item.GetPrice();
-				}
-				_isDirty = false;  // Update cache status
+				_cachedPrice = _items.Sum(item => item.GetPrice());
+				_isDirty = false;
 			}
-			return _cachedPrice;
+			return _cachedPrice.Value;
 		}
 
 		public void Update()
 		{
 			_isDirty = true;
+			Notify();  // Notify parent bundles to update price
 		}
+
+
+		public void Attach(IObserver observer)
+		{
+			_observers.Add(observer);
+		}
+
+		public void Detach(IObserver observer)
+		{
+			_observers.Remove(observer);
+
+		}
+
+		public void Notify()
+		{
+			_isDirty = true;  // Mark cache as outdated
+			foreach (var observer in _observers)
+			{
+				observer.Update();
+			}
+		}
+
+
+
 	}
 }

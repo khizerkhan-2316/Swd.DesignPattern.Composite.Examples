@@ -1,15 +1,11 @@
 ﻿using Swd.DesignPattern.Composite.Examples.Sales.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Swd.DesignPattern.Composite.Examples.Sales.Models
 {
 	public class Product : ISalesItem, ISubject
 	{
-
 		private string _name;
 		private decimal _price;
 		private List<IObserver> _observers = new List<IObserver>();
@@ -28,7 +24,7 @@ namespace Swd.DesignPattern.Composite.Examples.Sales.Models
 		public void SetPrice(decimal newPrice)
 		{
 			_price = newPrice;
-			Notify(); 
+			Notify();  
 		}
 
 		public void Display()
@@ -50,7 +46,7 @@ namespace Swd.DesignPattern.Composite.Examples.Sales.Models
 		{
 			foreach (var observer in _observers)
 			{
-				observer.Update();  
+				observer.Update();
 			}
 		}
 	}
