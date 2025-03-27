@@ -19,12 +19,12 @@ namespace Swd.DesignPattern.Composite.Examples.SalesSimpleExample
             electronicsBundle.Add(Keyboard);
 
             // Create another individual product
-            var product4 = new Product("Headphones", 150);
+            var Headphones = new Product("Headphones", 150);
 
             // Create a sales bundle containing another bundle and an individual product
             var ultimateBundle = new ProductBundle("Ultimate Bundle");
             ultimateBundle.Add(electronicsBundle);
-            ultimateBundle.Add(product4);
+            ultimateBundle.Add(Headphones);
 
             // Display details and calculate prices
             Console.WriteLine("Displaying individual product:");
